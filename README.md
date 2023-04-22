@@ -16,6 +16,8 @@ The project uses Mirflickr-25000 image dataset, which contains 25000 photographs
 
 ![](https://drive.google.com/uc?export=view&id=1REyKCB97D7uYAlft1Txr5xmU8ubP0OZD)
 
+![](https://drive.google.com/uc?export=view&id=1SxaGvstDsz1Vx4wxfKFgryahAKpMJiV9)
+
 ## Run Instructions
 
 The following instructions are based on Linux and MacOS system. 
