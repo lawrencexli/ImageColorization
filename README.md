@@ -12,7 +12,9 @@ The project uses Mirflickr-25000 image dataset, which contains 25000 photographs
 
 ## Showcase
 
-![](https://drive.google.com/uc?export=view&id=1uYzBZU_W2-Z4o2U9qC70eR1rFVSxCzAQ | width=50)
+![](https://drive.google.com/uc?export=view&id=1uYzBZU_W2-Z4o2U9qC70eR1rFVSxCzAQ)
+
+![](https://drive.google.com/uc?export=view&id=1REyKCB97D7uYAlft1Txr5xmU8ubP0OZD)
 
 ## Run Instructions
 
