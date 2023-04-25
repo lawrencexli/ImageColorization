@@ -131,4 +131,4 @@ dmypy.json
 # Project specific
 mirflickr25k/
 *.out
-*.png
+result.png
