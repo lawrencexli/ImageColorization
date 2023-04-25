@@ -1,3 +1,7 @@
+"""
+General dataset load class for pytorch dataset
+"""
+
 from glob import glob
 import os
 
@@ -21,11 +25,15 @@ Denormalize ab channel from range [-1, 1] to [-128, 127]
 def ifunc(x):
     return 255*(x+1) / 2 - 128
 
-
+"""
+Build dataset by specifying a dataset folder containing all .jpg images
+"""
 class Mirflickr:
     
     def __init__(self, data_dir='mirflickr25k', split_size=0.2):
         self.img_list = glob(os.path.join(data_dir, '*.jpg'))
+        
+        # Use random_state to make the training and evaluation set the same (Needed it for UNet pretrain and GAN train)
         self.train_list, self.eval_list = train_test_split(self.img_list, test_size = split_size, random_state=628)
         
     def build_dataset(self, size=256, batch_size=32):

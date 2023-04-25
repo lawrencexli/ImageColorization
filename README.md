@@ -24,6 +24,8 @@ The following instructions are based on Linux and MacOS system.
 
 ### Requirements
 
+The following are required dependencies for this project.
+
 * `Python 3.7`
 * `Pillow`
 * `scikit-learn`
@@ -43,10 +45,15 @@ The following instructions are based on Linux and MacOS system.
 * `train.py`: Train UNet DCGAN.
 * `ImageColorization.ipynb`: Evaluates the model and showcases results.
 * `saved_weights`: Saved model weights.
+* `PlotResult.ipynb`: Plot the evaluation metrics, including all generator and discriminator losses during training, and accuracy metrics such as SSIM and PSNR during evaluation.
 
 ### Running
 
 1. Download the image dataset, either from Mirflickr-25000 with link provided above or any other image dataset you like.
-2. Specify your dataset folder in `dataset.py`. Your dataset folder should contain all `.jpg` images.
+2. Specify your dataset folder in `dataset.py`. Your dataset folder should contain all `.jpg` images. No subfolders!
 3. Pretrain UNet generator by running `pretrain.py`, change any hyperparameter based on your preferences. 
-4. Train UNet DCGAN by running `train.py`, change any hyperparameter based on your preferences. 
+4. You should see that a pretrained weight file is generated under the `saved_weights` folder.
+5. Train UNet DCGAN by running `train.py` using the pretrained weight file that is generated, change any hyperparameter based on your preferences. 
+6. You should see that a final weight file is generated alongside with a `.pkl` file storing all evaluation metrics tracking. 
+7. Use `PlotResult.ipynb` to plot the evaluation metrics over epochs. 
+8. Use `ImageColorization.ipynb` to visualize colored samples from your dataset and perform evaluation. 

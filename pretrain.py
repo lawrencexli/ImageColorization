@@ -1,3 +1,9 @@
+"""
+Pretrain function.
+Code structure and idea from
+https://towardsdatascience.com/colorizing-black-white-images-with-u-net-and-conditional-gan-a-tutorial-81b2df111cd8
+"""
+
 import torchvision
 from copy import deepcopy
 from tqdm import tqdm
@@ -11,6 +17,9 @@ train_dataloader, eval_dataloader = mirflickr.build_dataset(size=size, batch_siz
 
 model = MainModel(size=size, pretrained=False)
 
+"""
+Pretrain UNet by supervised learning
+"""
 def Unet_train(net_G, train_dl, opt, criterion, epochs, device):
     performance = []
     for e in range(epochs):
@@ -32,8 +41,11 @@ net_G = model.build_ResUNet(1, 2, size)
 device = model.device
 opt = torch.optim.Adam(net_G.parameters(), lr=1e-4)
 criterion = torch.nn.L1Loss()        
-net_G, performance = Unet_train(net_G, train_dataloader, opt, criterion, 20, device)
+net_G, performance = Unet_train(net_G, train_dataloader, opt, criterion, 120, device)
+
+# Save the weights
 torch.save(net_G.state_dict(), "saved_weights/res18-unet.pt")
 
+# Save the L1 loss by epochs
 with open('saved_weights/performance-unet.pkl', 'wb') as f:
     pickle.dump(performance, f)

@@ -1,3 +1,9 @@
+"""
+Training function.
+Code structure and idea from
+https://towardsdatascience.com/colorizing-black-white-images-with-u-net-and-conditional-gan-a-tutorial-81b2df111cd8
+"""
+
 import torchvision
 from torchmetrics.functional import peak_signal_noise_ratio
 from matplotlib import pyplot as plt
@@ -16,6 +22,9 @@ model = MainModel(size=size, pretrained=True)
 def average(lst):
     return sum(lst) / len(lst)
 
+"""
+Compute SSIM similarity score between generated ab channel and true ab channel
+"""
 def compute_ssim(true, result, is_train=False):
     if is_train:
         true = true.detach().cpu().numpy()
@@ -32,6 +41,9 @@ def compute_ssim(true, result, is_train=False):
         
     return (a + b) / 2
 
+"""
+Main GAN train function
+"""
 def train(model, train_dataloader, num_epoch):
     performance = {'d_fake_loss': [], # The loss between fake image and 0 (False)
                    'd_real_loss': [], # The loss between real image and 1 (True)
@@ -101,7 +113,7 @@ def train(model, train_dataloader, num_epoch):
             g_gan_loss = model.DLoss(fake_preds, true_label) # Minimize this loss for better creation of realistic fake images
             total_g_gan_loss += float(g_gan_loss) * 100
             
-            g_l1_loss = model.GLoss(fake_outputs, ab) * 100. # Multiplied by a L1 regularization term to balance
+            g_l1_loss = model.GLoss(fake_outputs, ab) * 100. # Multiplied by a L1 regularization term to balance the L1 loss and GAN loss. Prioritize the L1 loss over GAN loss.
             total_g_l1_loss += float(g_l1_loss) 
             
             # Loss for fooling discriminator and loss for the differences between generated color and true color
@@ -113,7 +125,7 @@ def train(model, train_dataloader, num_epoch):
             psnr.append(float(peak_signal_noise_ratio(ab, fake_outputs)))
             ssim.append(float(compute_ssim(ab, fake_outputs, is_train=True)))
             
-            
+        # Record all loss and accuracy metrics
         performance['d_fake_loss'].append(total_d_fake_loss / len(train_dataloader.dataset))
         performance['d_real_loss'].append(total_d_real_loss / len(train_dataloader.dataset))
         performance['d_loss'].append(total_d_loss / len(train_dataloader.dataset))
@@ -131,7 +143,7 @@ def train(model, train_dataloader, num_epoch):
                                                                                               average(psnr)))
     
     #####
-    # Always return the best model
+    # Always return the generator model for final evaluation and inference
     #####
     return model.netG, performance
 
