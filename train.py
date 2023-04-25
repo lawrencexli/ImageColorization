@@ -50,10 +50,10 @@ def train(model, train_dataloader, num_epoch):
                    'd_loss': [],      # d_fake_loss + d_real_loss
                    'g_gan_loss': [],  # The loss between fake image and 1 (True) !!So the generator can generate realistic fake images!!
                    'g_l1_loss': [],   # The loss between the generated fake color and actual color 
-                   'g_loss': [],
-                   'ssim': [],
-                   'psnr': []}      # g_gan_loss + g_l1_loss
-    
+                   'g_loss': [],      # g_gan_loss + g_l1_loss
+                   'ssim': [],        # SSIM evaluation metric
+                   'psnr': []}        # PSNR evaluation metric
+     
     for epoch in range(num_epoch):
         total_d_fake_loss = 0.0
         total_d_real_loss = 0.0
