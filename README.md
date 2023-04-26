@@ -8,7 +8,7 @@ Spring 2023, Columbia University
 This project implements an image colorization system based on the paper image-to-image translation with conditional adversarial networks, known as the pix2pix model. A UNet with DCGAN model is implemented with UNet as generator and a deep convolutional conditional discriminator to achieve realistic photogrgraph colorization.
 
 ## Dataset
-The project uses Mirflickr-25000 image dataset, which contains 25000 photographs retrieved from the social photography site Flickr through its public API. Each image in the dataset was classified to an image category, such as people, street, nature, animal etc. The dataset is available here: https://press.liacs.nl/mirflickr/mirdownload.html
+The project uses Mirflickr-25000 image dataset, which contains 25000 photographs retrieved from the social photography site Flickr through its public API. Each image in the dataset was classified to an image category, such as people, street, nature, animal etc. The dataset is available here: https://press.liacs.nl/mirflickr/mirdownload.html.
 
 ## Showcase
 
@@ -44,16 +44,18 @@ The following are required dependencies for this project.
 * `pretrain.py`: Pretrains UNet generator through supervised learning.
 * `train.py`: Train UNet DCGAN.
 * `ImageColorization.ipynb`: Evaluates the model and showcases results.
-* `saved_weights`: Saved model weights.
+* `saved_weights/`: Saved model weights.
+* `custom_image/`: Custom image dataset containing jpg images. Minimum number of images is 2. 
+* `evaluation_plots/`: Stores plots for different evaluation metrics during training.
 * `PlotResult.ipynb`: Plot the evaluation metrics, including all generator and discriminator losses during training, and accuracy metrics such as SSIM and PSNR during evaluation.
 
 ### Running
 
-1. Download the image dataset, either from Mirflickr-25000 with link provided above or any other image dataset you like. (In our project we downloaded Mirflickr-25000 and extract the zip as `mirflickr25k` folder)
+1. Download the image dataset, either from Mirflickr-25000 with link provided above or any other image dataset you like. In our project we downloaded Mirflickr-25000 and extract the zip as `mirflickr25k` folder. We used the command `wget http://press.liacs.nl/mirflickr/mirflickr25k.v3b/mirflickr25k.zip` and `unzip mirflickr25k.zip` to retrieve the data.
 2. Specify your dataset folder in `dataset.py`. Your dataset folder should contain all `.jpg` images. No subfolders!
 3. Pretrain UNet generator by running `pretrain.py`, change any hyperparameter based on your preferences. 
-4. You should see that a pretrained weight file is generated under the `saved_weights` folder.
-5. Train UNet DCGAN by running `train.py` using the pretrained weight file that is generated, change any hyperparameter based on your preferences. 
-6. You should see that a final weight file is generated alongside with a `.pkl` file storing all evaluation metrics tracking. 
-7. Use `PlotResult.ipynb` to plot the evaluation metrics over epochs. 
-8. Use `ImageColorization.ipynb` to visualize colored samples from your dataset and perform evaluation. 
+4. You should see that a pretrained weight file is generated under the `saved_weights/` folder.
+5. Train UNet DCGAN by running `train.py` using the pretrained weight file that is generated in `saved_weights/`, change any hyperparameter based on your preferences. 
+6. You should see that a final weight file is generated alongside with a `.pkl` file storing all evaluation metrics tracking in `saved_weights/`. 
+7. Use `PlotResult.ipynb` to plot the evaluation metrics over epochs and them under `evaluation_plots/`. Loads the performance tracker dictionary pickle file from `saved_weights/`.
+8. Use `ImageColorization.ipynb` to visualize colored samples from your dataset and perform evaluation. Loads the generator UNet model with trained weights from `saved_weights/` and generate `result.png` file for colorization result. 
