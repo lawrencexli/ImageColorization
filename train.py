@@ -22,6 +22,10 @@ model = MainModel(size=size, pretrained=True)
 def average(lst):
     return sum(lst) / len(lst)
 
+def l1_penalty(epoch):
+    denominator = 1/99 + 1.05**(epoch - 200)
+    return 1/denominator + 1
+
 """
 Compute SSIM similarity score between generated ab channel and true ab channel
 """
@@ -53,7 +57,7 @@ def train(model, train_dataloader, num_epoch):
                    'ssim': [],        # SSIM evaluation metric
                    'psnr': []}        # PSNR evaluation metric
      
-    l1_loss_penalty = 100.
+    #l1_loss_penalty = 100.
     for epoch in range(num_epoch):
         total_d_fake_loss = 0.0
         total_d_real_loss = 0.0
@@ -63,7 +67,7 @@ def train(model, train_dataloader, num_epoch):
         total_g_loss = 0.0
         ssim = []
         psnr = []
-        GAN_loss_count = 0
+        #GAN_loss_count = 0
         
         for data in tqdm(train_dataloader):
             L = data['L'].to(model.device)
@@ -114,7 +118,7 @@ def train(model, train_dataloader, num_epoch):
             g_gan_loss = model.DLoss(fake_preds, true_label) # Minimize this loss for better creation of realistic fake images
             total_g_gan_loss += float(g_gan_loss) * 100
             
-            g_l1_loss = model.GLoss(fake_outputs, ab) * l1_loss_penalty # Multiplied by a L1 regularization term to balance the L1 loss and GAN loss. Prioritize the L1 loss over GAN loss.
+            g_l1_loss = model.GLoss(fake_outputs, ab) * l1_penalty(epoch) # Multiplied by a L1 regularization term to balance the L1 loss and GAN loss. Prioritize the L1 loss over GAN loss.
             total_g_l1_loss += float(g_l1_loss) 
             
             # Loss for fooling discriminator and loss for the differences between generated color and true color
@@ -135,6 +139,7 @@ def train(model, train_dataloader, num_epoch):
         performance['psnr'].append(average(psnr))
         
         # Perform L1 regularization decrease for G L1 loss
+        """
         if epoch >= 25 and performance['g_gan_loss'][-1] > performance['g_gan_loss'][-2]:
             GAN_loss_count += 1
             
@@ -145,6 +150,7 @@ def train(model, train_dataloader, num_epoch):
             
         else:
             GAN_loss_count = 0
+        """
         
         print('=> Current generator L1 loss penalty factor: %.1f' % (l1_loss_penalty))
         print('=> Epoch %d/%d: L1 loss = %.4f, GAN loss = %.4f, SSIM = %.4f, PSNR = %.4f ' % (epoch+1, 
