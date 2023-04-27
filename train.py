@@ -14,7 +14,7 @@ from model import *
 import pickle
 from skimage.metrics import structural_similarity as ssim
 
-size = 64
+size = 256
 mirflickr = Mirflickr()
 train_dataloader, eval_dataloader = mirflickr.build_dataset(size=size, batch_size=16)
 model = MainModel(size=size, pretrained=True)
@@ -53,7 +53,7 @@ def train(model, train_dataloader, num_epoch):
                    'ssim': [],        # SSIM evaluation metric
                    'psnr': []}        # PSNR evaluation metric
      
-    l1_regularization = 100.
+    l1_loss_penalty = 100.
     for epoch in range(num_epoch):
         total_d_fake_loss = 0.0
         total_d_real_loss = 0.0
@@ -114,7 +114,7 @@ def train(model, train_dataloader, num_epoch):
             g_gan_loss = model.DLoss(fake_preds, true_label) # Minimize this loss for better creation of realistic fake images
             total_g_gan_loss += float(g_gan_loss) * 100
             
-            g_l1_loss = model.GLoss(fake_outputs, ab) * l1_regularization # Multiplied by a L1 regularization term to balance the L1 loss and GAN loss. Prioritize the L1 loss over GAN loss.
+            g_l1_loss = model.GLoss(fake_outputs, ab) * l1_loss_penalty # Multiplied by a L1 regularization term to balance the L1 loss and GAN loss. Prioritize the L1 loss over GAN loss.
             total_g_l1_loss += float(g_l1_loss) 
             
             # Loss for fooling discriminator and loss for the differences between generated color and true color
@@ -135,18 +135,18 @@ def train(model, train_dataloader, num_epoch):
         performance['psnr'].append(average(psnr))
         
         # Perform L1 regularization decrease for G L1 loss
-        if epoch >= 80 and performance['g_gan_loss'][-1] > performance['g_gan_loss'][-2]:
+        if epoch >= 25 and performance['g_gan_loss'][-1] > performance['g_gan_loss'][-2]:
             GAN_loss_count += 1
             
-            if GAN_loss_count == 3:
-                l1_regularization -= 5.
-                if l1_regularization < 1.:
-                    l1_regularization = 1.
+            if GAN_loss_count == 5:
+                l1_loss_penalty -= 5.
+                if l1_loss_penalty < 1.:
+                    l1_loss_penalty = 1.
             
         else:
             GAN_loss_count = 0
         
-        print('=> Current L1 regularization term: %.1f' % (l1_regularization))
+        print('=> Current generator L1 loss penalty factor: %.1f' % (l1_loss_penalty))
         print('=> Epoch %d/%d: L1 loss = %.4f, GAN loss = %.4f, SSIM = %.4f, PSNR = %.4f ' % (epoch+1, 
                                                                                               num_epoch, 
                                                                                               total_g_l1_loss / len(train_dataloader.dataset),

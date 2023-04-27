@@ -18,6 +18,8 @@ The project uses Mirflickr-25000 image dataset, which contains 25000 photographs
 
 ![](https://drive.google.com/uc?export=view&id=1SxaGvstDsz1Vx4wxfKFgryahAKpMJiV9)
 
+![](https://drive.google.com/uc?export=view&id=1FXw75FJTUEhWynxzYfCb3Pu4qzDMTTnt)
+
 ## Run Instructions
 
 The following instructions are based on Linux and MacOS system. 
@@ -59,3 +61,8 @@ The following are required dependencies for this project.
 6. You should see that a final weight file is generated alongside with a `.pkl` file storing all evaluation metrics tracking in `saved_weights/`. 
 7. Use `PlotResult.ipynb` to plot the evaluation metrics over epochs and them under `evaluation_plots/`. Loads the performance tracker dictionary pickle file from `saved_weights/`.
 8. Use `ImageColorization.ipynb` to visualize colored samples from your dataset and perform evaluation. Loads the generator UNet model with trained weights from `saved_weights/` and generate `result.png` file for colorization result. 
+
+### Attributes
+
+Part of the codes are modified and revised from https://towardsdatascience.com/colorizing-black-white-images-with-u-net-and-conditional-gan-a-tutorial-81b2df111cd8 by Moein Shariatnia and the pytorch implementation of deep concolutional discriminator available at google cloud tutorials. 
+
