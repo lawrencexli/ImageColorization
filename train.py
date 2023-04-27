@@ -68,6 +68,7 @@ def train(model, train_dataloader, num_epoch):
         ssim = []
         psnr = []
         #GAN_loss_count = 0
+        l1_loss_penalty = l1_penalty(epoch)
         
         for data in tqdm(train_dataloader):
             L = data['L'].to(model.device)
@@ -118,7 +119,7 @@ def train(model, train_dataloader, num_epoch):
             g_gan_loss = model.DLoss(fake_preds, true_label) # Minimize this loss for better creation of realistic fake images
             total_g_gan_loss += float(g_gan_loss) * 100
             
-            g_l1_loss = model.GLoss(fake_outputs, ab) * l1_penalty(epoch) # Multiplied by a L1 regularization term to balance the L1 loss and GAN loss. Prioritize the L1 loss over GAN loss.
+            g_l1_loss = model.GLoss(fake_outputs, ab) * l1_loss_penalty # Multiplied by a L1 regularization term to balance the L1 loss and GAN loss. Prioritize the L1 loss over GAN loss.
             total_g_l1_loss += float(g_l1_loss) 
             
             # Loss for fooling discriminator and loss for the differences between generated color and true color
