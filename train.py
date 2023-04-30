@@ -166,8 +166,8 @@ def train(model, train_dataloader, num_epoch):
     #####
     return model.netG, performance
 
-model_result, performance = train(model, train_dataloader, num_epoch=200)
-torch.save(model_result, "saved_weights/unet_GAN_final")
+model_result, performance = train(model, train_dataloader, num_epoch=120)
+torch.save(model_result, "saved_weights/unet_GAN_25k")
 
-with open('saved_weights/performance_final.pkl', 'wb') as f:
+with open('saved_weights/performance_25k.pkl', 'wb') as f:
     pickle.dump(performance, f)

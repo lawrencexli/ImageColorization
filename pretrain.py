@@ -41,7 +41,7 @@ net_G = model.build_ResUNet(1, 2, size)
 device = model.device
 opt = torch.optim.Adam(net_G.parameters(), lr=1e-4)
 criterion = torch.nn.L1Loss()        
-net_G, performance = Unet_train(net_G, train_dataloader, opt, criterion, 120, device)
+net_G, performance = Unet_train(net_G, train_dataloader, opt, criterion, 20, device)
 
 # Save the weights
 torch.save(net_G.state_dict(), "saved_weights/res18-unet.pt")

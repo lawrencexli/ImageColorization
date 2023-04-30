@@ -1,3 +1,6 @@
 saved_weights/performance_final.pkl filter=lfs diff=lfs merge=lfs -text
 saved_weights/res18-unet.pt filter=lfs diff=lfs merge=lfs -text
 saved_weights/unet_GAN_25k filter=lfs diff=lfs merge=lfs -text
+saved_weights/unet_GAN_60 filter=lfs diff=lfs merge=lfs -text
+saved_weights/performance_60.pkl filter=lfs diff=lfs merge=lfs -text
+saved_weights/performance_25k.pkl filter=lfs diff=lfs merge=lfs -text
