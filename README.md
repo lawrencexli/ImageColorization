@@ -46,7 +46,7 @@ The following are required dependencies for this project.
 * `pretrain.py`: Pretrains UNet generator through supervised learning.
 * `train.py`: Train UNet DCGAN.
 * `ImageColorization.ipynb`: Evaluates the model and showcases results.
-* `saved_weights/`: Saved model weights.
+* `saved_weights/`: Saved model weights. All trained models are stored here. 
 * `custom_image/`: Custom image dataset containing jpg images. Minimum number of images is 2. 
 * `evaluation_plots/`: Stores plots for different evaluation metrics during training.
 * `PlotResult.ipynb`: Plot the evaluation metrics, including all generator and discriminator losses during training, and accuracy metrics such as SSIM and PSNR during evaluation.
