@@ -38,7 +38,7 @@ The following are required dependencies for this project.
 * `Pillow`
 * `scikit-learn`
 * `scikit-image`
-* `torch`
+* `torch >= 1.13`
 * `torchvision`
 * `torchmetrics`
 * `fastai`
