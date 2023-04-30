@@ -4,6 +4,9 @@ By Lawrence Li (ll3598@columbia.edu) and Isabella Cao (sc3912@columbia.edu) for 
 
 Spring 2023, Columbia University
 
+## Important note
+All trained model weights are stored in the `saved_weights` directory through github large file storage (Git LFS). When cloning this repository, you need to use the `git lfs clone` command to have a complete clone of this repository. Otherwise, you may need to manually download the weights from our github repository source. More details about Git LFS can be found at https://git-lfs.com. 
+
 ## About the project
 This project implements an image colorization system based on the paper image-to-image translation with conditional adversarial networks, known as the pix2pix model. A UNet with DCGAN model is implemented with UNet as generator and a deep convolutional conditional discriminator to achieve realistic photogrgraph colorization.
 
