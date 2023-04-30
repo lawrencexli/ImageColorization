@@ -59,7 +59,7 @@ The following are required dependencies for this project.
 
 ### Running
 
-1. Download the image dataset, either from Mirflickr-25000 with link provided above or any other image dataset you like. In our project we downloaded Mirflickr-25000 and extract the zip as `mirflickr25k` folder. We used the command `wget http://press.liacs.nl/mirflickr/mirflickr25k.v3b/mirflickr25k.zip` and `unzip mirflickr25k.zip` to retrieve the data.
+1. Download the image dataset, either from Mirflickr-25000 with link provided above or any other image dataset you like. In our project we downloaded Mirflickr-25000 and extract the zip as `mirflickr25k` folder. We used the command `wget http://press.liacs.nl/mirflickr/mirflickr25k.v3b/mirflickr25k.zip` and `unzip mirflickr25k.zip` to retrieve the data. We also renamed the folder to `mirflickr25k` for better naming. 
 2. Specify your dataset folder in `dataset.py`. Your dataset folder should contain all `.jpg` images. No subfolders!
 3. Pretrain UNet generator by running `pretrain.py`, change any hyperparameter based on your preferences. 
 4. You should see that a pretrained weight file is generated under the `saved_weights/` folder.
