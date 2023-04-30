@@ -12,7 +12,7 @@ This project implements an image colorization system based on the paper image-to
 
 ## Dataset
 
-**This repository does not include the image dataset. You need to manually download it from the provided link below. **
+**This repository does not include the image dataset. You need to manually download it from the provided link below.**
 
 The project uses Mirflickr-25000 image dataset, which contains 25000 photographs retrieved from the social photography site Flickr through its public API. Each image in the dataset was classified to an image category, such as people, street, nature, animal etc. The dataset can be downloaded here: https://press.liacs.nl/mirflickr/mirdownload.html.
 
