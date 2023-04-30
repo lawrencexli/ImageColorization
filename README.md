@@ -11,7 +11,10 @@ All trained model weights are stored in the `saved_weights` directory through gi
 This project implements an image colorization system based on the paper image-to-image translation with conditional adversarial networks, known as the pix2pix model. A UNet with DCGAN model is implemented with UNet as generator and a deep convolutional conditional discriminator to achieve realistic photogrgraph colorization.
 
 ## Dataset
-The project uses Mirflickr-25000 image dataset, which contains 25000 photographs retrieved from the social photography site Flickr through its public API. Each image in the dataset was classified to an image category, such as people, street, nature, animal etc. The dataset is available here: https://press.liacs.nl/mirflickr/mirdownload.html.
+
+**This repository does not include the image dataset. You need to manually download it from the provided link below. **
+
+The project uses Mirflickr-25000 image dataset, which contains 25000 photographs retrieved from the social photography site Flickr through its public API. Each image in the dataset was classified to an image category, such as people, street, nature, animal etc. The dataset can be downloaded here: https://press.liacs.nl/mirflickr/mirdownload.html.
 
 ## Showcase
 
