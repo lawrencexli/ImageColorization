@@ -72,5 +72,5 @@ The following are required dependencies for this project.
 
 ### Attributes
 
-Part of the codes are modified and revised from https://towardsdatascience.com/colorizing-black-white-images-with-u-net-and-conditional-gan-a-tutorial-81b2df111cd8 by Moein Shariatnia and the pytorch implementation of deep concolutional discriminator available at google cloud tutorials. 
+Part of the codes are modified and revised from https://towardsdatascience.com/colorizing-black-white-images-with-u-net-and-conditional-gan-a-tutorial-81b2df111cd8 by Moein Shariatnia and the pytorch implementation of deep convolutional discriminator available at google cloud tutorials. 
 
