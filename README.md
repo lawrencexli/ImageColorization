@@ -7,6 +7,8 @@ Spring 2023, Columbia University
 ## Cloning this repository
 All trained model weights are stored in the `saved_weights` directory through github large file storage (Git LFS). When cloning this repository, you need to use the `git lfs clone` command to have a complete clone of this repository. Otherwise, you may need to manually download the weights from our github repository source. More details about Git LFS and how to install can be found at https://git-lfs.com. 
 
+If you are unable to clone the trained weights in the `saved_weights` directory due to git lfs reaching bandwidth limit, you can download them from the google drive at https://drive.google.com/drive/folders/17ArXN3c9W2ozD7XnojPGCUPuWItu2u_Y?usp=sharing.
+
 ## About the project
 This project implements an image colorization system based on the paper image-to-image translation with conditional adversarial networks, known as the pix2pix model. A UNet with DCGAN model is implemented with UNet as generator and a deep convolutional conditional discriminator to achieve realistic photogrgraph colorization.
 
