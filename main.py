@@ -1,7 +1,12 @@
 import torch
 from dataset import *
 from fastapi import FastAPI, File, UploadFile, HTTPException
-from fastapi.responses import Response
+from fastapi.responses import Response, HTMLResponse
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.templating import Jinja2Templates
+from fastapi.staticfiles import StaticFiles
+from fastapi import Request
+from pathlib import Path
 import io
 
 SUPPORTED_EXTENSIONS = {"jpeg", "jpg", "png"}
@@ -18,6 +23,24 @@ def denormalize(img_norm):
 
 # Start the app
 app = FastAPI()
+
+origins = ["*"]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+app.mount("/static", StaticFiles(directory=Path(__file__).parent.absolute() / "static"), name="static")
+
+templates = Jinja2Templates(directory="templates")
+
+@app.get("/", response_class=HTMLResponse)
+async def read_item(request: Request):
+    return templates.TemplateResponse("index.html", {"request": request})
 
 # Inference endpoint
 @app.post("/predict/")
